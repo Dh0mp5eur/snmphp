@@ -51,4 +51,24 @@ Array
         )
 
 )
+
+Array
+(
+    [Hostname] => nas01
+    [Email] => admin@diskstation
+    [Location] => Unknown
+    [CPU: % user] => 0
+    [CPU: % system] => 0
+    [CPU: % idle] => 99
+    [Mem: total] => 2034860
+    [Mem: available] => 1568060
+    [Mem: shared] => 7800
+    [Mem: buffers] => 134488
+    [Mem: cached] => 189636
+    [Swap: total] => 3317676
+    [Swap: avail] => 3317676
+    [Load: 1 min] => 0.05
+    [Load: 5 min] => 0.13
+    [Load: 15 min] => 0.14
+)
 ```
