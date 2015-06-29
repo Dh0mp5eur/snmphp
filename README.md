@@ -10,7 +10,7 @@ Support list is very small for now but you can see where this project is headed.
 
 There's lots to do (adding devices, error handling...) so feel free to contribute.
 
-##### sample output on Synology RS851
+##### Sample output on Synology RS851
 ```
 Array
 (
