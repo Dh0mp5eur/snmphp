@@ -4,7 +4,10 @@ PHP library for monitoring various devices via SNMP
 Requires php5-snmp package to be installed
 
 Currently supported:
- * Synology: disk information (tested on RS815+)
+ * Synology: disk information, system information
+
+Tested hardware:
+ * Synology RS815+
 
 Support list is very small for now but you can see where this project is headed.
 
