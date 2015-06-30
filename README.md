@@ -37,7 +37,7 @@ Array
 )
 ```
 
-##### Sample get_network_info() iteration output on Synology RS851
+##### Sample get_network_info() iteration output on Synology RS815+
 ```
 function get_network_info() {
   $iface_list = $this->snmp->map_oids($this->snmp->walk("IF-MIB::ifDescr"));
