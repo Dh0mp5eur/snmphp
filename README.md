@@ -1,77 +1,102 @@
 # snmphp
-PHP library for monitoring various devices via SNMP
+PHP classes for monitoring various devices via SNMP
 
-Requires php5-snmp package to be installed
+Could be the building block for the poller in a monitoring suite
 
-Currently supported:
- * Synology: disk information, system information
+Requires php5-snmp and snmp-mibs-downloader packages to be installed
 
-Tested hardware:
- * Synology RS815+
+Currently tested on HP ProCurve 1920-48G and Synology RS815+.
 
-Support list is very small for now but you can see where this project is headed.
+Easily extensible to any other SNMP enabled device.
 
-There's lots to do (adding devices, error handling...) so feel free to contribute.
-
-##### Sample output on Synology RS851
+##### Sample map_oids($query) function
 ```
+$iface_list = $this->snmp->map_oids($this->snmp->walk("IF-MIB::ifDescr"));
+
 Array
 (
-    [0] => Array
-        (
-            [Name] => Disk 1
-            [PartID] => WD30EFRX-68EUZN0
-            [Type] => SATA
-            [Temperature] => 36
-            [Status] => Normal
-        )
-
-    [1] => Array
-        (
-            [Name] => Disk 2
-            [PartID] => WD30EFRX-68EUZN0
-            [Type] => SATA
-            [Temperature] => 37
-            [Status] => Normal
-        )
-
-    [2] => Array
-        (
-            [Name] => Disk 3
-            [PartID] => WD30EFRX-68EUZN0
-            [Type] => SATA
-            [Temperature] => 36
-            [Status] => Normal
-        )
-
-    [3] => Array
-        (
-            [Name] => Disk 4
-            [PartID] => WD30EFRX-68EUZN0
-            [Type] => SATA
-            [Temperature] => 35
-            [Status] => Normal
-        )
-
+    [IF-MIB::ifDescr.1] => lo
+    [IF-MIB::ifDescr.2] => sit0
+    [IF-MIB::ifDescr.3] => eth0
+    [IF-MIB::ifDescr.4] => eth1
+    [IF-MIB::ifDescr.5] => eth2
+    [IF-MIB::ifDescr.6] => eth3
+    [IF-MIB::ifDescr.7] => bond0
+    [IF-MIB::ifDescr.9] => tun0
 )
+Array
+(
+    [lo] => 1
+    [sit0] => 2
+    [eth0] => 3
+    [eth1] => 4
+    [eth2] => 5
+    [eth3] => 6
+    [bond0] => 7
+    [tun0] => 9
+)
+```
+
+##### Sample get_network_info() iteration output on Synology RS851
+```
+function get_network_info() {
+  $iface_list = $this->snmp->map_oids($this->snmp->walk("IF-MIB::ifDescr"));
+  foreach($iface_list as $name=>$oid) {
+    $netinfo[$name]['In octets']= $this->snmp->get("IF-MIB::ifInOctets.$oid");
+    $netinfo[$name]['Out octets']= $this->snmp->get("IF-MIB::ifOutOctets.$oid");
+  }
+  return $netinfo;
+}
 
 Array
 (
-    [Hostname] => nas01
-    [Email] => admin@diskstation
-    [Location] => Unknown
-    [CPU: % user] => 0
-    [CPU: % system] => 0
-    [CPU: % idle] => 99
-    [Mem: total] => 2034860
-    [Mem: available] => 1568060
-    [Mem: shared] => 7800
-    [Mem: buffers] => 134488
-    [Mem: cached] => 189636
-    [Swap: total] => 3317676
-    [Swap: avail] => 3317676
-    [Load: 1 min] => 0.05
-    [Load: 5 min] => 0.13
-    [Load: 15 min] => 0.14
+    [lo] => Array
+        (
+            [In octets] => 146186
+            [Out octets] => 146186
+        )
+
+    [sit0] => Array
+        (
+            [In octets] => 0
+            [Out octets] => 0
+        )
+
+    [eth0] => Array
+        (
+            [In octets] => 77262691
+            [Out octets] => 5131418
+        )
+
+    [eth1] => Array
+        (
+            [In octets] => 12311560
+            [Out octets] => 69724411
+        )
+
+    [eth2] => Array
+        (
+            [In octets] => 0
+            [Out octets] => 0
+        )
+
+    [eth3] => Array
+        (
+            [In octets] => 0
+            [Out octets] => 0
+        )
+
+    [bond0] => Array
+        (
+            [In octets] => 89575556
+            [Out octets] => 74855829
+        )
+
+    [tun0] => Array
+        (
+            [In octets] => 9794197
+            [Out octets] => 49403006
+        )
+
 )
 ```
