@@ -90,32 +90,32 @@ $hp1920_info = $hp1920->get_system_info();
        <div class="row">
          <div class="col-sm-11">
            <h3>Port status</h3>
-			<?php
-			$half = count($hp1920_ifaces)/2; // what happens when not div by 2?
-			$i=1;
-			foreach($hp1920_ifaces as $iface_name=>$iface_status) {
-				if($iface_status == "up(1)") {
-					echo "<button type=\"button\" class=\"btn btn-xs btn-success\" style=\"width: 25px;\">$i</button>&nbsp;";
-				} else {
-					echo "<button type=\"button\" class=\"btn btn-xs btn-danger\" style=\"width: 25px;\">$i</button>&nbsp;";
-				}
-				if($i == $half) { echo "<br><br>"; } // ugly temporary hack :) count and /2 next time
-				$i++;
+	<?php
+		$half = count($hp1920_ifaces)/2; // what happens when not div by 2?
+		$i=1;
+		foreach($hp1920_ifaces as $iface_name=>$iface_status) {
+			if($iface_status == "up(1)") {
+				echo "<button type=\"button\" class=\"btn btn-xs btn-success\" style=\"width: 25px;\">$i</button>&nbsp;";
+			} else {
+				echo "<button type=\"button\" class=\"btn btn-xs btn-danger\" style=\"width: 25px;\">$i</button>&nbsp;";
 			}
-			?>
+			if($i == $half) { echo "<br><br>"; }
+			$i++;
+		}
+	?>
 
             <br><h3>Port statistics</h3>
-            <?php
-				foreach($hp1920_ifaces_d as $iface_name=>$iface_values) {
-					if($iface_values['Status'] == "up(1)") {
-						echo "<br><button type=\"button\" class=\"btn btn-xs btn-success\" style=\"width: 120px;\">$iface_name</button>&nbsp;";
-					} else {
-						echo "<br><button type=\"button\" class=\"btn btn-xs btn-danger\" style=\"width: 120px;\">$iface_name</button>&nbsp;";
-					}
-					echo "<span class=\"label label-default\">IN: ".$iface_values['InOctets']."</span>&nbsp;
-					<span class=\"label label-default\">OUT: ".$iface_values['OutOctets']."</span><br>";
-				}
-			?>
+	<?php
+		foreach($hp1920_ifaces_d as $iface_name=>$iface_values) {
+			if($iface_values['Status'] == "up(1)") {
+				echo "<br><button type=\"button\" class=\"btn btn-xs btn-success\" style=\"width: 120px;\">$iface_name</button>&nbsp;";
+			} else {
+				echo "<br><button type=\"button\" class=\"btn btn-xs btn-danger\" style=\"width: 120px;\">$iface_name</button>&nbsp;";
+			}
+			echo "<span class=\"label label-default\">IN: ".$iface_values['InOctets']."</span>&nbsp;
+				<span class=\"label label-default\">OUT: ".$iface_values['OutOctets']."</span><br>";
+			}
+	?>
 
 				</div>
 			</div>
