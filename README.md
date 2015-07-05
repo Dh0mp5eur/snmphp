@@ -1,5 +1,4 @@
 # snmphp
-![alt tag](https://i.imgur.com/1yR0goD.png)
 
 PHP classes for monitoring various devices via SNMP
 
@@ -10,6 +9,9 @@ Requires php5-snmp and snmp-mibs-downloader packages to be installed
 Currently tested on HP ProCurve 1920-48G and Synology RS815+.
 
 Easily extensible to any other SNMP enabled device.
+
+##### Example of bootstrap integration
+![alt tag](https://i.imgur.com/1yR0goD.png)
 
 ##### Sample map_oids($query) function
 ```
