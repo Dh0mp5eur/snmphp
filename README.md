@@ -10,7 +10,7 @@ Currently tested on HP ProCurve 1920-48G and Synology RS815+.
 
 Easily extensible to any other SNMP enabled device.
 
-##### Example of bootstrap integration
+##### Example of Bootstrap integration
 ![alt tag](https://i.imgur.com/1yR0goD.png)
 
 ##### Sample map_oids($query) function
