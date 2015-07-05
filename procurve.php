@@ -32,9 +32,9 @@
 		function get_iface_status_detail() {
 			$iface_list = $this->snmp->map_oids($this->snmp->walk("IF-MIB::ifDescr"));
 			foreach($iface_list as $iface_name=>$iface_oid) {
-				$iface_status_detail[$iface_name]['Link:'] = $this->snmp->get("IF-MIB::ifOperStatus.$iface_oid");
-				$iface_status_detail[$iface_name]['In octets:'] = $this->snmp->get("IF-MIB::ifInOctets.$iface_oid");
-				$iface_status_detail[$iface_name]['Out octets:'] = $this->snmp->get("IF-MIB::ifOutOctets.$iface_oid");
+				$iface_status_detail[$iface_name]['Status'] = $this->snmp->get("IF-MIB::ifOperStatus.$iface_oid");
+				$iface_status_detail[$iface_name]['InOctets'] = $this->snmp->get("IF-MIB::ifInOctets.$iface_oid");
+				$iface_status_detail[$iface_name]['OutOctets'] = $this->snmp->get("IF-MIB::ifOutOctets.$iface_oid");
 
 			}
 		return $iface_status_detail;

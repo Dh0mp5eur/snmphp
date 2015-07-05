@@ -55,19 +55,19 @@ class snmp_querier {
 	function clear_snmp_string($data) {
 		// clean this all up (filter?)
 		if(is_array($data)) {
-		foreach($data as $key=>&$val) {
-		$val = str_replace('STRING: ', '', $val);
-		$val = str_replace('Counter32: ', '', $val);
-		$val = str_replace('"', '', $val);
-		$val = trim($val);
-		}
+			foreach($data as $key=>&$val) {
+				$val = str_replace('STRING: ', '', $val);
+				$val = str_replace('Counter32: ', '', $val);
+				$val = str_replace('"', '', $val);
+				$val = trim($val);
+			}
 		}
 		else {
-		$data = str_replace('STRING: ', '', $data);
-		$data = str_replace('INTEGER: ', '', $data);
-		$data = str_replace('Counter32: ', '', $data);
-		$data = str_replace('"', '', $data);
-		$data = trim($data);
+			$data = str_replace('STRING: ', '', $data);
+			$data = str_replace('INTEGER: ', '', $data);
+			$data = str_replace('Counter32: ', '', $data);
+			$data = str_replace('"', '', $data);
+			$data = trim($data);
 		}
 		return $data;
 	}
