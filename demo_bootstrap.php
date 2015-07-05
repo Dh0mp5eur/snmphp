@@ -4,7 +4,7 @@ include("synology.php");
 include("procurve.php");
 $hp1920 = new procurve("192.168.10.3", "public");
 $hp1920_ifaces = $hp1920->get_iface_status_short();
-$hp1920_ifaces_d = array_reverse($hp1920->get_iface_status_detail(), TRUE);
+$hp1920_ifaces_d = $hp1920->get_iface_status_detail();
 $hp1920_info = $hp1920->get_system_info();
 ?>
 <!DOCTYPE html>
@@ -18,7 +18,7 @@ $hp1920_info = $hp1920->get_system_info();
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>SNMP diag</title>
+    <title>SNMPHP</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -51,7 +51,7 @@ $hp1920_info = $hp1920->get_system_info();
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">SNMP diag</a>
+            <a class="navbar-brand" href="#">SNMPHP</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -68,7 +68,7 @@ $hp1920_info = $hp1920->get_system_info();
       <div class="col-sm-12">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">sw01</h3>
+            <h3 class="panel-title"><?=$hp1920_info['Hostname']?></h3>
           </div>
           <div class="panel-body">
             <div class="row">
@@ -91,14 +91,15 @@ $hp1920_info = $hp1920->get_system_info();
          <div class="col-sm-11">
            <h3>Port status</h3>
 			<?php
-			$i = 1;
+			$half = count($hp1920_ifaces)/2; // what happens when not div by 2?
+			$i=1;
 			foreach($hp1920_ifaces as $iface_name=>$iface_status) {
 				if($iface_status == "up(1)") {
 					echo "<button type=\"button\" class=\"btn btn-xs btn-success\" style=\"width: 25px;\">$i</button>&nbsp;";
 				} else {
 					echo "<button type=\"button\" class=\"btn btn-xs btn-danger\" style=\"width: 25px;\">$i</button>&nbsp;";
 				}
-				if($i == "28") { echo "<br><br>"; }
+				if($i == $half) { echo "<br><br>"; } // ugly temporary hack :) count and /2 next time
 				$i++;
 			}
 			?>
