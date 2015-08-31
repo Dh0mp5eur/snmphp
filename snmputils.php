@@ -23,11 +23,11 @@ class snmp_querier {
 	}
 
 	function get_oids($query) {
-		// this function builds iterators for snmp gets startin from a walk, e.g.
+		// this function builds iterators for snmp gets starting from a walk, e.g.
 		// IF-MIB::ifDescr.1 and IF-MIB::ifDescr.3 --> [0] => 1, [1] => 3
 		foreach($query as $oid=>$value) {
-		$oid_split = explode(".", $oid);
-		$oidlist[] = $oid_split[count($oid_split)-1];
+			$oid_split = explode(".", $oid);
+			$oidlist[] = $oid_split[count($oid_split)-1];
 		}
 		return $oidlist;
 	}
@@ -40,8 +40,8 @@ class snmp_querier {
 		// we're swapping keys with their values and doing some cleanup..
 		$oidmap = array_flip($query);
 		foreach($oidmap as $item=>&$oid) {
-		$oid_split = explode(".", $oid);
-		$oid = $oid_split[count($oid_split)-1];
+			$oid_split = explode(".", $oid);
+			$oid = $oid_split[count($oid_split)-1];
 		}
 		return $oidmap;
 	}
