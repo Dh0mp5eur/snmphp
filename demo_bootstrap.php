@@ -1,8 +1,7 @@
 <?php
 include("snmputils.php");
-include("synology.php");
 include("procurve.php");
-$hp1920 = new procurve("192.168.10.3", "public");
+$hp1920 = new procurve("192.168.10.3", "public", "2c");
 $hp1920_ifaces = $hp1920->get_iface_status_short();
 $hp1920_ifaces_d = $hp1920->get_iface_status_detail();
 $hp1920_info = $hp1920->get_system_info();
@@ -18,17 +17,10 @@ $hp1920_info = $hp1920->get_system_info();
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>SNMPHP</title>
+    <title>snmphp</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="navbar.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="js/ie-emulation-modes-warning.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -51,7 +43,7 @@ $hp1920_info = $hp1920->get_system_info();
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">SNMPHP</a>
+            <a class="navbar-brand" href="#">snmphp</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -91,7 +83,7 @@ $hp1920_info = $hp1920->get_system_info();
          <div class="col-sm-11">
            <h3>Port status</h3>
 	<?php
-		$half = count($hp1920_ifaces)/2; // what happens when not div by 2?
+		$half = count($hp1920_ifaces)/2;
 		$i=1;
 		foreach($hp1920_ifaces as $iface_name=>$iface_status) {
 			if($iface_status == "up(1)") {
@@ -108,9 +100,9 @@ $hp1920_info = $hp1920->get_system_info();
 	<?php
 		foreach($hp1920_ifaces_d as $iface_name=>$iface_values) {
 			if($iface_values['Status'] == "up(1)") {
-				echo "<br><button type=\"button\" class=\"btn btn-xs btn-success\" style=\"width: 120px;\">$iface_name</button>&nbsp;";
+				echo "<br><button type=\"button\" class=\"btn btn-xs btn-success\" style=\"width: 130px;\">$iface_name</button>&nbsp;";
 			} else {
-				echo "<br><button type=\"button\" class=\"btn btn-xs btn-danger\" style=\"width: 120px;\">$iface_name</button>&nbsp;";
+				echo "<br><button type=\"button\" class=\"btn btn-xs btn-danger\" style=\"width: 130px;\">$iface_name</button>&nbsp;";
 			}
 			echo "<span class=\"label label-default\">IN: ".$iface_values['InOctets']."</span>&nbsp;
 				<span class=\"label label-default\">OUT: ".$iface_values['OutOctets']."</span><br>";
@@ -131,7 +123,5 @@ $hp1920_info = $hp1920->get_system_info();
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
