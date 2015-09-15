@@ -4,9 +4,9 @@ PHP classes for monitoring various devices via SNMP, supporting v1 and v2c.
 
 This code could be the building block for the poller in a monitoring suite, for example.
 
-Requires ```php5-snmp``` and ```snmp-mibs-downloader``` packages to be installed.
-
 Currently tested on HP ProCurve 1920-48G and Synology RS815+, but it's designed to be easily portable to any other SNMP enabled device.
+
+Requires ```php5-snmp``` and ```snmp-mibs-downloader``` packages to be installed.
 
 ##### Example of Bootstrap integration
 ![demo](https://i.imgur.com/pzljcUF.png)
